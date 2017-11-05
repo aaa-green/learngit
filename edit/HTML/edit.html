@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../CSS/edit.css"/>
+    <title>编辑设备信息</title>
+</head>
+    
+<body>
+    
+    <div class="header">
+        <a id="toMainPage" href="#" target="view-windows">
+                <img src="../yunpicture2.png" />
+        </a>
+        <div>
+            <a id="toDeveloperCenter" href="#">开发者中心</a>
+            <a id="user" href="#"><img src="../pictrue.png" /></a>
+        </div>
+    </div>
+    
+    <div>
+        <div id="navigationBar">
+           <!-- <ul>
+                <li><a href="#">产品概况</a></li>
+                <li><a href="#">设备管理</a></li>
+                <li><a href="#">数据流模板</a></li>
+                <li><a href="#">设备群组</a></li>
+                <li><a href="#">APIKey管理</a></li>
+                <li><a href="#">触发器管理</a></li>
+                <li><a href="#">应用管理</a></li>
+                <li><a href="#">第三方开发平台</a></li>
+                <li><a href="#">在线调试</a></li>
+            </ul> -->
+        </div>
+        <div id="content">
+            <div id="title">
+                <h3>设备管理</h3>
+                <div>
+                    <div id="title1"><img src="../tubiao.png" />设备管理</div>
+                    <h3>·</h3>
+                    <div id="title2">编辑设备详情</div>
+                </div>
+            </div>
+            <div id="page">
+                <div id="editInformation">编辑设备信息</div>
+                <hr>
+                <form>
+                    <div class="area1">
+                        设备接入协议：
+                        <a href="#">HTTP协议</a>
+                    </div>
+                    <div class="area2">
+                        <label>设备名称：</label><br />
+                        <input type="text" name="name" value="基于畅想物联云平台" />
+                    </div>
+                    <div class="area2">
+                        <label>设备编号：</label><br />
+                        <input type="text" name="number" value="SeFAWE85vMveSbEm" />
+                    </div>
+                    <div class="area3">
+                        <label>数据保密性：</label><br />
+                        <div>
+                            <input class="g-radio" type="radio" name="date-confidentiality" id="private" checked="checked" />
+                            <label for="private">私有</label>
+                        </div>
+                        <div>
+                            <input class="g-radio" type="radio" name="date-confidentiality" id="open"/>
+                            <label for="open">公开</label>
+                        </div>
+                    </div>
+                    <div class="area4">
+                        <label>设备图标：</label><br />
+                        <img src="../%E6%8D%95%E8%8E%B7.PNG" />
+                        <a href="#">修改默认</a>
+                        <a href="#">本地上传</a>
+                    </div>
+                    <div class="area5">
+                        <label>设备描述：</label><br />
+                        <textarea rows="5" cols="10" placeholder="设备描述"></textarea>
+                    </div>
+                    <div class="area6">
+                        <label>产品品类：</label>
+                        <span>其他</span>
+                        <span>其他</span>
+                        <span>其他</span>
+                    </div>
+                    <div class="area7">
+                        <label>设备标签：</label><br />
+                        <input type="text" name="label" />
+                        <a href="#"><img src="../%E6%8D%952%E8%8E%B7.PNG" /></a>
+                    </div>
+                    <div class="area7">
+                        <label>设备位置：</label><br />
+                        <input type="text" name="position" placeholder="通过输入然后选择或点击地图来确定坐标" />
+                        <a href="#"><img src="../%E6%8D%9522%E8%8E%B7.PNG" /></a>
+                    </div>
+                    <div class="map"><iframe src="map2.html" width="500" height="250" frameborder="0" scrolling="no"></iframe></div>
+                    <div class="button">
+                        <input id="submit-button" type="submit" value="确定" />
+                        <input id="reset-button" type="reset" value="取消">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+    
+</html>
