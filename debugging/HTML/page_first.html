@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../CSS/page_first.css"/>
+    <title>数据模拟器</title>   
+</head>
+    
+<body>
+    <div id="left">
+        <form>
+            <div>
+                <label for="deviceID"><img src="../star.png"/>设备ID：</label><br />
+                <input type="text" name="设备ID" id="deviceID" />
+            </div>
+            <div>
+                <label for="apikey"><img src="../star.png"/>APIKey：</label><br />
+                <input type="text" name="APIKey" id="apikey" />
+            </div>
+            <div>
+                <label for="dateFlow"><img src="../star.png"/>数据流：</label><br />
+                <input type="text" name="数据流" id="dateFlow" />
+            </div>
+            <div class="hraf">
+                <label>数据范围：</label><br />
+                <input type="text" name="min" />
+                <label class="haha">至</label>
+                <input type="text" name="max" />
+            </div>
+            <div class="hraf">
+                <label for="Time">间隔时间：</label><br />
+                <input type="text" name="time" id="Time" />
+                <label class="haha">秒</label>
+            </div>
+            <div class="button">
+                <input type="button" value="发送一次" />
+                <input type="button" value="连续发送" />
+            </div>
+        </form>
+    </div>
+    <div id="right">
+        <p>发送日志记录</p>
+        <pre>
+        </pre>
+    </div>
+</body>
+    
+</html>

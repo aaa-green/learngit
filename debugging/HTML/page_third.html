@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../CSS/page_third.css"/>
+    <title>API调试工具</title>   
+</head>
+    
+<body>
+    <div id="left">
+        <form>
+            <div>
+                <label for="address"><img src="../star.png"/>ApiURL地址：</label><br />
+                <input type="text" name="ApiURL地址" id="address" />
+            </div>
+            <div>
+                <label>请求方法：</label><br />
+                <select>
+                    <option value='' selected="selected">POST</option>
+                    <option value=''>GET</option>
+                    <option value=''>PUT</option>
+                    <option value=''>DELECT</option>
+                </select>
+            </div>
+            <div>
+                <label>请求参数：</label>
+            </div>
+            <div id="area">
+                <label for="requestContent ">请求内容：</label><br />
+                <textarea id="requestContent"></textarea>
+            </div>
+            <div>
+                <label for="apikey"><img src="../star.png"/>APIKey：</label><br />
+                <input type="text" name="APIKey" id="apikey" />
+            </div>
+            <div class="button">
+                <input type="button" value="执行请求" />
+            </div>
+        </form>
+    </div>
+    <div id="right">
+        <p>返回结果</p>
+        <pre>
+        </pre>
+    </div>
+</body>
+    
+</html>
