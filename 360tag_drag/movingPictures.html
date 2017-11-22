@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>360图片移动</title>
+	<style type="text/css">
+		body {
+			margin:0;
+			padding:0;
+		}
+		.photo {
+			width:640px;
+			height:400px;
+			border:1px solid #CCC;
+			margin:100px auto;
+		}
+		ul {
+			position:relative;
+			width:100%;
+			height:100%;
+			margin:0;
+			padding:0;
+		}
+		li {
+			float:left;
+			list-style:none;
+			width:200px;
+			height:120px;
+			margin:10px 0 0 10px;
+			border-radius:10px;
+		}
+		li>img {
+			width:100%;
+			height:100%;
+			border-radius:10px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="photo">
+		<ul>
+			<li><img src="./images/1.png" alt="" /></li>
+			<li><img src="./images/2.png" alt="" /></li>
+			<li><img src="./images/3.png" alt="" /></li>
+			<li><img src="./images/4.png" alt="" /></li>
+			<li><img src="./images/5.png" alt="" /></li>
+			<li><img src="./images/6.png" alt="" /></li>
+			<li><img src="./images/7.png" alt="" /></li>
+			<li><img src="./images/8.png" alt="" /></li>
+			<li><img src="./images/9.png" alt="" /></li>
+		</ul>
+	</div>
+	<script>
+		//将图片改成定位布局
+		var aLi = document.getElementsByTagName("li");
+		var photo = document.getElementsByClassName("photo")[0];
+		var len = aLi.length;
+		var aLiOffset = [];  // 存放位置值，根元素一一对应
+		var goalLi; // 目标元素
+		var z = 1;
+		for (var i = 0; i < len; i++) {
+			//console.log(aLi[i].offsetTop, aLi[i].offsetLeft);
+			aLiOffset.push([aLi[i].offsetTop, aLi[i].offsetLeft]);
+		}
+
+		for (var m = 0; m < len; m++) {
+			aLi[m].style.position = "absolute";  // 给每个li设置位置属性
+			aLi[m].style.top = aLiOffset[m][0] + "px";  // 给每个li设置定位属性
+			aLi[m].style.left = aLiOffset[m][1] + "px";
+			aLi[m].style.margin = 0;
+		}
+
+		//每个li元素都能拖拽
+		for (var k = 0; k < len; k++) {
+			aLi[k].onmousedown = function() {
+				var self = this;
+				var selfL = this.offsetLeft;   // 元素的原始x轴位置
+				var selfT = this.offsetTop;    // 元素的原始y轴位置
+
+				//var ev = window.event||ev; 火狐浏览器下不支持这样获得event
+				var ev = document.all ? window.event : arguments[0] ? arguments[0] : event;
+				if (ev.keyCode == 13) {
+					this.checkDouble(obj);
+					defaultTrendGroup.trendRedraw();
+					ev.returnValue;
+				}
+				//console.log(ev);
+				var x0 = ev.clientX; // 鼠标点击时x的位置
+				var y0 = ev.clientY; // 鼠标点击时y的位置
+				//console.log(x0, y0);
+
+				document.onmousemove = function() {
+					var ev = document.all ? window.event : arguments[0] ? arguments[0] : event;
+					if (ev.keyCode == 13) {
+					this.checkDouble(obj);
+					defaultTrendGroup.trendRedraw();
+					ev.returnValue;
+					} 
+					//console.log(ev);
+					var x1 = ev.clientX; // 鼠标移动时x的置
+					var y1 = ev.clientY; // 鼠标移动时y的置
+					//console.log(x1, y1);
+					//新x的位置 = 原来的x位置 + 鼠标移动的x坐标 - 鼠标点击的x坐标
+					var xoffset = selfL + x1 - x0; // 元素新位置的x的值
+					var yoffset = selfT + y1 - y0; // 元素新位置的y的值
+					self.style.left = xoffset + "px";
+					self.style.top = yoffset + "px";
+					self.style.zIndex = z++;
+					//坐标转换
+					var xR = x1 - photo.offsetLeft; // 转换后的鼠标移动的x的坐标
+					var yR = y1 - photo.offsetTop;  // 转换后的鼠标移动的y的坐标
+					//console.log(xR, yR);
+					//碰撞检测
+					for (var n = 0; n < len; n++) {
+						aLi[n].style.transform = ""; 
+						aLi[n].style.boxShadow = "";
+						if ( aLi[n] != self &&  
+							 xR > aLi[n].offsetLeft && 
+							 xR < aLi[n].offsetLeft +200 && 
+							 yR > aLi[n].offsetTop && 
+							 yR < aLi[n].offsetTop + 120) {
+							//console.log("碰撞成功");
+							aLi[n].style.transform = "scale(1.05)";        // 放大元素
+							aLi[n].style.boxShadow = "0px 0px 10px gray";  // 添加阴影 
+							goalLi = aLi[n];
+						}
+					}
+					document.onmouseup = function() {
+						if(goalLi) {
+							self.style.left = goalLi.offsetLeft + "px";
+							self.style.top = goalLi.offsetTop + "px";
+							goalLi.style.left = selfL + "px";
+							goalLi.style.top = selfT + "px";
+							goalLi.style.transform = ""; // 目标元素样式重置
+							goalLi.style.boxShadow = ""; // 目标元素样式重置
+							goalLi = "";  // 目标元素重置
+							self = "";    // self重置
+						} else {  //如果没有碰撞成功，归位
+							self.style.left = selfL + "px";
+							self.style.top = selfT + "px";
+						}
+						document.onmousemove = "";
+					}
+				}
+				return false; // 组织默认事件
+			}
+		}
+
+	</script>
+</body>
+
+</html>
