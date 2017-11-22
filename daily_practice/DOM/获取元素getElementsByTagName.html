@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Shopping list</title>
+</head>
+
+<body>
+    <h1>What to buy</h1>
+    <p title="a gentle reminder">Don't forget to buy this stuff.</p>
+    <ul id="purchases">
+        <li>A tin of beans</li>
+        <li class="sale">Cheeae</li>
+        <li class="sale importent">Milk</li>
+    </ul>
+    <script>
+  //      alert(document.getElementsByTagName("li").length);
+  //      for(var i=0; i < document.getElementsByTagName("li").length; i++) {
+  //          alert(typeof document.getElementsByTagName("li")[i]);
+  //      }
+        var items = document.getElementsByTagName("li");
+        for(var i=0; i<items.length; i++) {
+            alert(typeof items[i]);
+        }
+        alert(document.getElementsByTagName("*").length);
+        
+        //id属性值是purchase的元素包含着多少个列表项！
+        var shopping = document.getElementById("purchases");
+        var items = shopping.getElementsByTagName("*");
+        alert(items.length);
+    </script>
+</body>
+
+</html>

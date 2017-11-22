@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta charset="utf-8" />
+    <title>Example</title>
+    <script>
+        window.onload = function() {
+            var para = document.getElementById("example");
+            //alert(typeof para.nodeName);
+            //alert(typeof para.style);
+            alert("The color is " + para.style.color);
+            alert("The font family is " + para.style.fontFamily);
+            alert("The font size is " + para.style.fontSize);
+            para.style.color = "pink"; //style属性的值必须放在引号里（可单可双）
+            para.style.font = "2em 'Times', serif";
+        }
+        
+    </script>
+</head>
+    
+<body>
+    <p id="example" style="color: #444; font: 12px 'Arial', sans-serif;">
+        An example of a paragraph
+    </p>
+</body>
+    
+</html>
+
+
+<!--style属性只能返回内嵌样式，所以用style属性获取样式没有实用价值
+    但是style属性可用来更新样式-->

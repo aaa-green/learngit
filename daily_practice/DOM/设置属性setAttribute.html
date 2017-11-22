@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Shopping list</title>
+</head>
+
+<body>
+    <h1>What to buy</h1>
+    <p title="a gentle reminder">Don't forget to buy this stuff.</p>
+    <ul id="purchases">
+        <li>A tin of beans</li>
+        <li class="sale">Cheese</li>
+        <li class="sale importent">Milk</li>
+    </ul>
+    <script>
+        
+        //证明这个元素的属性是否发生变换
+        var shopping = document.getElementById("purchases");
+        alert(shopping.getAttribute("title"));
+        shopping.setAttribute("title", "a list of goods");
+        alert(shopping.getAttribute("title"));
+        
+        
+        var paras = document.getElementsByTagName("p");
+        for (var i=0; i<paras.length; i++) {
+            var title_text = paras[i].getAttribute("title");
+            if (title_text) {
+                paras[i].setAttribute("title", "brand new title text");
+                alert(paras[i].getAttribute("title"));
+            }
+        }
+    </script>
+</body>
+
+</html>
