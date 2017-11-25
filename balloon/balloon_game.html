@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Balloon Game</title>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		body {
+			overflow: hidden;
+			background-color: #CCC;
+		}
+		.balloon {
+			position: absolute;
+			top: 0;
+			left: 0;
+		/*	width: 140px;
+			height: 140px;*/
+			width: 140px;
+			height: 140px;
+			background-color: #FAF9F9;
+			/*圆角*/
+			border-radius: 100% 100% 40% 100%;
+			/*盒子阴影:x位移 y位移 羽化程度 半径 颜色 模式*/
+			box-shadow: -8px -8px 80px -9px #873940 inset;
+			/*旋转*/
+			transform: rotate(45deg);
+		}
+		.balloon:after {
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			/*display: block;*/
+			content: '';
+			border: 8px solid transparent;
+			border-right-color: #873940;
+			border-radius: 50%;
+			transform: rotate(45deg);
+		}
+	</style>
+</head>
+
+<body>
+	<script>
+		//var num = 10;  // 存储气球初始化个数
+		var Wh = window.innerHeight;  // 获得浏览器高度
+		var Ww = window.innerWidth;
+		var bWaH = 140;
+		var timer; //  初始化定时器
+		var oballoon = []; // 空数组存储结点
+
+		createBalloon(10);  // 主动执行函数
+		move();
+
+        // 每隔60毫秒，执行move一次
+		timer = setInterval(move, 60);
+
+		document.addEventListener("click", function(e) {
+			if (e.target.className.toLowerCase() === 'balloon') {
+				var ele = e.target;
+
+				boom.call(ele, function() {
+					this.parentNode.removeChild(this);
+					createBalloon(1);
+					oballoon.splice(oballoon.lastIndexOf(this), 1);
+				}.bind(ele));
+			}
+		}, false);
+
+		// 爆破动画
+		function boom(cb) {
+			this.timer = setInterval(function() {
+				if (this.offsetWidth < 10) {
+					clearInterval(this.timer);
+					cb && cb(); // 如果cb存在执行cb
+					return false;
+				}
+				this.speed++;
+				this.style.width = this.offsetWidth - 10 + "px";
+				this.style.height = this.offsetHeight - 10 + "px";
+			}.bind(this), 1000/60);
+		}
+
+
+		//气球移动函数
+		function move() {
+			for (var i = 0, item; item = oballoon[i++];) {
+				//console.log(i);//console.log(idex);
+				//item.style.top = item.offsetTop - 10 + 'px';
+				// item.style.top = item.offsetTop - ((Math.random() * 8) >> 0) + 'px';
+				item.style.top = item.offsetTop - item.speed + 'px';
+				// 判断气球是否到达浏览器顶端
+				if (item.offsetTop < -160) {
+					item.style.top = Wh + "px";
+				}
+			}
+		}
+
+		//初始化
+		function createBalloon(num) {
+			var allballoon = document.createDocumentFragment();
+			for (var i = 0; i < num; i++) {
+				var rnumber = ((Math.random() * Ww) >> 0) - bWaH;  // 去随机数
+					rnumber = Math.abs(rnumber);  // 取绝对值
+				var balloons = document.createElement("div"); // 添加类名
+				balloons.className = "balloon";
+				balloons.style.top = Wh + "px";  // 初始化高度
+				balloons.style.left = rnumber + "px";  
+				balloons.speed = (Math.random() * 8 | 0) + 1;  // 自定义属性speed（非法属性）
+				oballoon.push(balloons); // 预存
+				allballoon.appendChild(balloons);
+			}
+			document.body.appendChild(allballoon);
+		}
+
+	</script>
+</body>
+
+</html>
